@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-enum VideoDeviceInputType : Int {
+public enum VideoDeviceInputType : Int {
     case FrontDevice
     case BackDevice
 }
@@ -17,11 +17,11 @@ enum VideoDeviceInputType : Int {
 let deviceTypeMapDictionary = [ VideoDeviceInputType.FrontDevice : AVCaptureDevicePosition.Front,
     VideoDeviceInputType.BackDevice : AVCaptureDevicePosition.Back]
 
-class VideoDeviceInput : AVCaptureDeviceInput {
+public class VideoDeviceInput : AVCaptureDeviceInput {
     
     //MARK: --- Init ---
     
-    init( withDeviceInputType type : VideoDeviceInputType) {
+    public init( withDeviceInputType type : VideoDeviceInputType) {
         
         let captureDevice = VideoDeviceInput.getCaptureDeviceForType(type)
         try! super.init(device: captureDevice)
@@ -42,7 +42,6 @@ class VideoDeviceInput : AVCaptureDeviceInput {
         }
         
         return AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        
     }
     
 }

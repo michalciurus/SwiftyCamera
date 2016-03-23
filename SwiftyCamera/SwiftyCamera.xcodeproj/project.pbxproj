@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F30F8C01CA2E8D200B1B4F7 /* VideoCaptureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F30F8BF1CA2E8D200B1B4F7 /* VideoCaptureSession.swift */; };
+		3F483A0E1CA2EA86002F9771 /* SwiftyCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F483A0D1CA2EA86002F9771 /* SwiftyCamera.swift */; };
 		3F6446731CA2A39000525111 /* SwiftyCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F6446721CA2A39000525111 /* SwiftyCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3F64467B1CA2A3E900525111 /* VideoCaptureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F64467A1CA2A3E900525111 /* VideoCaptureSession.swift */; };
 		3F64467D1CA2BF0E00525111 /* VideoDeviceInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F64467C1CA2BF0E00525111 /* VideoDeviceInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F30F8BF1CA2E8D200B1B4F7 /* VideoCaptureSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCaptureSession.swift; sourceTree = "<group>"; };
+		3F483A0D1CA2EA86002F9771 /* SwiftyCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyCamera.swift; sourceTree = "<group>"; };
 		3F64466F1CA2A39000525111 /* SwiftyCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F6446721CA2A39000525111 /* SwiftyCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyCamera.h; sourceTree = "<group>"; };
 		3F6446741CA2A39000525111 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3F64467A1CA2A3E900525111 /* VideoCaptureSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoCaptureSession.swift; path = ../VideoCaptureSession.swift; sourceTree = "<group>"; };
 		3F64467C1CA2BF0E00525111 /* VideoDeviceInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDeviceInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,9 +53,10 @@
 			isa = PBXGroup;
 			children = (
 				3F6446721CA2A39000525111 /* SwiftyCamera.h */,
-				3F64467A1CA2A3E900525111 /* VideoCaptureSession.swift */,
+				3F30F8BF1CA2E8D200B1B4F7 /* VideoCaptureSession.swift */,
 				3F6446741CA2A39000525111 /* Info.plist */,
 				3F64467C1CA2BF0E00525111 /* VideoDeviceInput.swift */,
+				3F483A0D1CA2EA86002F9771 /* SwiftyCamera.swift */,
 			);
 			path = SwiftyCamera;
 			sourceTree = "<group>";
@@ -137,7 +140,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F64467D1CA2BF0E00525111 /* VideoDeviceInput.swift in Sources */,
-				3F64467B1CA2A3E900525111 /* VideoCaptureSession.swift in Sources */,
+				3F30F8C01CA2E8D200B1B4F7 /* VideoCaptureSession.swift in Sources */,
+				3F483A0E1CA2EA86002F9771 /* SwiftyCamera.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
