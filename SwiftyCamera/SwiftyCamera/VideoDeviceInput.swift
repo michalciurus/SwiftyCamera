@@ -21,10 +21,10 @@ class VideoDeviceInput : AVCaptureDeviceInput {
     
     //MARK: --- Init ---
     
-    init( withDeviceInputType type : VideoDeviceInputType) throws {
+    init( withDeviceInputType type : VideoDeviceInputType) {
         
         let captureDevice = VideoDeviceInput.getCaptureDeviceForType(type)
-        try super.init(device: captureDevice)
+        try! super.init(device: captureDevice)
     
     }
     
