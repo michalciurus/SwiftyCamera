@@ -23,12 +23,15 @@ public class VideoCaptureSession {
                 self.captureSession = AVCaptureSession()
                 let videoInput = VideoDeviceInput(withDeviceInputType: VideoDeviceInputType.FrontDevice)
                 self.captureSession?.addInput(videoInput)
+                self.createAndAddVideoOutput()
                 self.captureSession?.startRunning()
             }
         }
     }
     
-    public func getPreviewLayerWithFrame( frame : CGRect  ) -> CALayer? {
+    //MARK: --- Public ---
+    
+    public func getPreviewLayerWithFrame( frame : CGRect ) -> CALayer? {
         var previewLayer : CALayer? = nil
         
         if let session = captureSession {
