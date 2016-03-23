@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-class SwiftyCaptureSession {
+class VideoCaptureSession {
     
     var captureSession : AVCaptureSession?
     
@@ -25,7 +25,7 @@ class SwiftyCaptureSession {
     }
     
     //MARK: --- Private ---
-    
+        
     private func requestVideoAuthorizationWithResultCallback( callback : (Bool) -> Void ) {
         AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: callback)
     }

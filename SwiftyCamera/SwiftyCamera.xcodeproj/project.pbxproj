@@ -8,14 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		3F6446731CA2A39000525111 /* SwiftyCamera.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F6446721CA2A39000525111 /* SwiftyCamera.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3F64467B1CA2A3E900525111 /* SwiftyCaptureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F64467A1CA2A3E900525111 /* SwiftyCaptureSession.swift */; };
+		3F64467B1CA2A3E900525111 /* VideoCaptureSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F64467A1CA2A3E900525111 /* VideoCaptureSession.swift */; };
+		3F64467D1CA2BF0E00525111 /* VideoDeviceInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F64467C1CA2BF0E00525111 /* VideoDeviceInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3F64466F1CA2A39000525111 /* SwiftyCamera.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyCamera.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F6446721CA2A39000525111 /* SwiftyCamera.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyCamera.h; sourceTree = "<group>"; };
 		3F6446741CA2A39000525111 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3F64467A1CA2A3E900525111 /* SwiftyCaptureSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyCaptureSession.swift; path = ../SwiftyCaptureSession.swift; sourceTree = "<group>"; };
+		3F64467A1CA2A3E900525111 /* VideoCaptureSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoCaptureSession.swift; path = ../VideoCaptureSession.swift; sourceTree = "<group>"; };
+		3F64467C1CA2BF0E00525111 /* VideoDeviceInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoDeviceInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,8 +51,9 @@
 			isa = PBXGroup;
 			children = (
 				3F6446721CA2A39000525111 /* SwiftyCamera.h */,
-				3F64467A1CA2A3E900525111 /* SwiftyCaptureSession.swift */,
+				3F64467A1CA2A3E900525111 /* VideoCaptureSession.swift */,
 				3F6446741CA2A39000525111 /* Info.plist */,
+				3F64467C1CA2BF0E00525111 /* VideoDeviceInput.swift */,
 			);
 			path = SwiftyCamera;
 			sourceTree = "<group>";
@@ -133,7 +136,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F64467B1CA2A3E900525111 /* SwiftyCaptureSession.swift in Sources */,
+				3F64467D1CA2BF0E00525111 /* VideoDeviceInput.swift in Sources */,
+				3F64467B1CA2A3E900525111 /* VideoCaptureSession.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +287,7 @@
 				3F6446791CA2A39000525111 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
