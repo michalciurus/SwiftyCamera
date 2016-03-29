@@ -17,14 +17,16 @@ public enum VideoDeviceInputType : Int {
 let deviceTypeMapDictionary = [ VideoDeviceInputType.FrontDevice : AVCaptureDevicePosition.Front,
     VideoDeviceInputType.BackDevice : AVCaptureDevicePosition.Back]
 
-public class VideoDeviceInput : AVCaptureDeviceInput {
+public class VideoDeviceInput {
+    
+    public var deviceInput : AVCaptureDeviceInput?
     
     //MARK: --- Init ---
     
     public init( withDeviceInputType type : VideoDeviceInputType) {
         
         let captureDevice = VideoDeviceInput.getCaptureDeviceForType(type)
-        try! super.init(device: captureDevice)
+        try! deviceInput =  AVCaptureDeviceInput(device: captureDevice)
     
     }
     

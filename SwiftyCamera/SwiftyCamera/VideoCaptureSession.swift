@@ -18,11 +18,12 @@ public class VideoCaptureSession {
     
     public init() {
         
+        self.captureSession = AVCaptureSession()
+        
            self.requestVideoAuthorizationWithResultCallback { (result) -> Void in
             if (result == true) {
-                self.captureSession = AVCaptureSession()
                 let videoInput = VideoDeviceInput(withDeviceInputType: VideoDeviceInputType.FrontDevice)
-                self.captureSession?.addInput(videoInput)
+                self.captureSession?.addInput(videoInput.deviceInput)
                 self.createAndAddVideoOutput()
                 self.captureSession?.startRunning()
             }
