@@ -9,6 +9,8 @@
 import Foundation
 import AVFoundation
 
+//MARK: --- Enums ---
+
 public enum VideoDeviceInputType : Int {
     case FrontDevice
     case BackDevice
@@ -16,6 +18,8 @@ public enum VideoDeviceInputType : Int {
 
 let deviceTypeMapDictionary = [ VideoDeviceInputType.FrontDevice : AVCaptureDevicePosition.Front,
                                 VideoDeviceInputType.BackDevice : AVCaptureDevicePosition.Back]
+
+//MARK: --- Class ---
 
 public class VideoDeviceInput {
     

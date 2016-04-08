@@ -20,7 +20,6 @@ public extension AVCaptureOutput {
                 }
             }
         }
-        
         return nil
         
     }

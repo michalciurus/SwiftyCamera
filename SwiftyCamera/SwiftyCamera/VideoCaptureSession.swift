@@ -9,6 +9,8 @@
 import Foundation
 import AVFoundation
 
+//MARK: --- Delegate Definition ---
+
 public protocol VideoCaptureSessionDelegate : class {
     func capturedPicture( pictureData : NSData )
     func deviceAuthorized( isAuthorized : Bool )
@@ -16,12 +18,11 @@ public protocol VideoCaptureSessionDelegate : class {
 
 // Optional methods in Swift 😅
 extension VideoCaptureSessionDelegate {
-    public func capturedPicture( pictureData : NSData ) {
-    }
-    
-    public func deviceAuthorized( isAuthorized : Bool ) {
-    }
+    public func capturedPicture( pictureData : NSData ) {}
+    public func deviceAuthorized( isAuthorized : Bool ) {}
 }
+
+//MARK: --- Enums ---
 
 public enum VideoCaptureSessionError : ErrorType {
     case NotAuthorized
@@ -32,6 +33,8 @@ public enum TorchModeStatus {
     case TorchModeOff
     case TorchModeAutomatic
 }
+
+//MARK: --- Class Implementation ---
 
 public class VideoCaptureSession {
     
@@ -49,18 +52,11 @@ public class VideoCaptureSession {
         
         isAuthorized = false
         self.captureSession = AVCaptureSession()
-        
-           self.requestVideoAuthorizationWithResultCallback { [weak self] (result) -> Void in
+        self.requestVideoAuthorizationWithResultCallback { [weak self] (result) -> Void in
             if result == true {
                 self?.delegate?.deviceAuthorized(result)
                 self?.isAuthorized = true
-                self?.videoInput = VideoDeviceInput(withDeviceInputType: VideoDeviceInputType.BackDevice)
-                if let input = self?.videoInput {
-                    self?.captureSession?.addInput(input.deviceInput)
-                }
-                self?.createAndAddVideoOutput()
-                self?.createAndAddStillImageOutput()
-                self?.captureSession?.startRunning()
+                self?.setup()
             }
         }
     }
@@ -112,7 +108,7 @@ public class VideoCaptureSession {
     }
     
     //MARK: --- Private ---
-        
+    
     private func requestVideoAuthorizationWithResultCallback( callback : (Bool) -> Void ) {
         AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: callback)
     }
@@ -125,6 +121,16 @@ public class VideoCaptureSession {
                 session.addOutput(videoOutput)
             }
         }
+    }
+    
+    private func setup() {
+        self.videoInput = VideoDeviceInput(withDeviceInputType: VideoDeviceInputType.BackDevice)
+        if let input = self.videoInput {
+            self.captureSession?.addInput(input.deviceInput)
+        }
+        self.createAndAddVideoOutput()
+        self.createAndAddStillImageOutput()
+        self.captureSession?.startRunning()
     }
     
     private func createAndAddStillImageOutput() {
