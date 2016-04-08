@@ -1,4 +1,4 @@
-//
+    //
 //  SwiftyDeviceInput.swift
 //  SwiftyCamera
 //

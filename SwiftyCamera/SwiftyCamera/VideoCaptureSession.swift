@@ -9,23 +9,33 @@
 import Foundation
 import AVFoundation
 
+public enum VideoCaptureSessionError : ErrorType {
+    case NotAuthorized
+}
+
 public class VideoCaptureSession {
     
     var captureSession : AVCaptureSession?
     var videoOutput :  AVCaptureMovieFileOutput?
+    var stillImageOutput : AVCaptureStillImageOutput?
+    
+    var isAuthorized : Bool
     
     //MARK: --- Init ---
     
     public init() {
         
+        isAuthorized = false
         self.captureSession = AVCaptureSession()
         
-           self.requestVideoAuthorizationWithResultCallback { (result) -> Void in
+           self.requestVideoAuthorizationWithResultCallback { [weak self] (result) -> Void in
             if (result == true) {
+                self?.isAuthorized = true
                 let videoInput = VideoDeviceInput(withDeviceInputType: VideoDeviceInputType.FrontDevice)
-                self.captureSession?.addInput(videoInput.deviceInput)
-                self.createAndAddVideoOutput()
-                self.captureSession?.startRunning()
+                self?.captureSession?.addInput(videoInput.deviceInput)
+                self?.createAndAddVideoOutput()
+                self?.createAndAddStillImageOutput()
+                self?.captureSession?.startRunning()
             }
         }
     }
@@ -43,6 +53,19 @@ public class VideoCaptureSession {
         return previewLayer
     }
     
+    public func takePicture() throws {
+        
+        if self.isAuthorized == false {
+            throw VideoCaptureSessionError.NotAuthorized
+        }
+        
+        if let imageOutput = self.stillImageOutput {
+            imageOutput.captureStillImageAsynchronouslyFromConnection(imageOutput.getActiveVideoConnection(), completionHandler: { (buffer, error) in
+                
+            })
+        }
+    }
+    
     //MARK: --- Private ---
         
     private func requestVideoAuthorizationWithResultCallback( callback : (Bool) -> Void ) {
@@ -57,5 +80,18 @@ public class VideoCaptureSession {
                 session.addOutput(videoOutput)
             }
         }
+    }
+    
+    private func createAndAddStillImageOutput() {
+        stillImageOutput = AVCaptureStillImageOutput()
+        
+        if let session = captureSession {
+            
+            if session.canAddOutput(stillImageOutput) {
+                session.addOutput(stillImageOutput)
+            }
+            
+        }
+        
     }
 }
