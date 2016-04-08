@@ -18,7 +18,7 @@ func delay(delay:Double, closure:()->()) {
         dispatch_get_main_queue(), closure)
 }
 
-public class SwiftyCamera : UIViewController {
+public class SwiftyCamera : UIViewController, VideoCaptureSessionDelegate {
     
     //MARK: --- Internal ---
     
@@ -27,6 +27,7 @@ public class SwiftyCamera : UIViewController {
     override public func viewDidLoad() {
         
         captureSession = VideoCaptureSession()
+        captureSession?.delegate = self
         
     }
     
@@ -35,6 +36,10 @@ public class SwiftyCamera : UIViewController {
         self.view.layer.insertSublayer(captureSession!.getPreviewLayerWithFrame(CGRect(x: 0, y: 0, width: 400, height: 400))!
             , atIndex: 0)
         
+        
+    }
+    
+    public func capturedPicture(pictureData: NSData) {
         
     }
     

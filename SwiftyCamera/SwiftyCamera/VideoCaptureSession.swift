@@ -9,6 +9,20 @@
 import Foundation
 import AVFoundation
 
+public protocol VideoCaptureSessionDelegate : class {
+    func capturedPicture( pictureData : NSData )
+    func deviceAuthorized( isAuthorized : Bool )
+}
+
+// Optional methods in Swift 😅
+extension VideoCaptureSessionDelegate {
+    public func capturedPicture( pictureData : NSData ) {
+    }
+    
+    public func deviceAuthorized( isAuthorized : Bool ) {
+    }
+}
+
 public enum VideoCaptureSessionError : ErrorType {
     case NotAuthorized
 }
@@ -20,6 +34,7 @@ public class VideoCaptureSession {
     var stillImageOutput : AVCaptureStillImageOutput?
     
     var isAuthorized : Bool
+    weak var delegate : VideoCaptureSessionDelegate?
     
     //MARK: --- Init ---
     
@@ -30,6 +45,7 @@ public class VideoCaptureSession {
         
            self.requestVideoAuthorizationWithResultCallback { [weak self] (result) -> Void in
             if (result == true) {
+                self?.delegate?.deviceAuthorized(result)
                 self?.isAuthorized = true
                 let videoInput = VideoDeviceInput(withDeviceInputType: VideoDeviceInputType.FrontDevice)
                 self?.captureSession?.addInput(videoInput.deviceInput)
@@ -61,6 +77,13 @@ public class VideoCaptureSession {
         
         if let imageOutput = self.stillImageOutput {
             imageOutput.captureStillImageAsynchronouslyFromConnection(imageOutput.getActiveVideoConnection(), completionHandler: { (buffer, error) in
+                
+                if buffer == nil || error != nil {
+                    return;
+                }
+                
+                let data = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(buffer)
+                self.delegate?.capturedPicture(data!)
                 
             })
         }
