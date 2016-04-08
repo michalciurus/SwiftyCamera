@@ -76,9 +76,7 @@ public class VideoCaptureSession {
     
     public func takePicture() throws {
         
-        if self.isAuthorized == false {
-            throw VideoCaptureSessionError.NotAuthorized
-        }
+        try self.checkAuthorization()
         
         if let imageOutput = self.stillImageOutput {
             imageOutput.captureStillImageAsynchronouslyFromConnection(imageOutput.getActiveVideoConnection(), completionHandler: { (buffer, error) in
@@ -94,7 +92,9 @@ public class VideoCaptureSession {
         }
     }
     
-    public func changeTorchMode( torchMode : TorchModeStatus) {
+    public func changeTorchMode( torchMode : TorchModeStatus) throws {
+        
+        try self.checkAuthorization()
         
         var avTorchModeStatus = AVCaptureTorchMode.Auto
         
@@ -108,6 +108,12 @@ public class VideoCaptureSession {
     }
     
     //MARK: --- Private ---
+    
+    private func checkAuthorization() throws {
+        if self.isAuthorized == false {
+            throw VideoCaptureSessionError.NotAuthorized
+        }
+    }
     
     private func requestVideoAuthorizationWithResultCallback( callback : (Bool) -> Void ) {
         AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: callback)
