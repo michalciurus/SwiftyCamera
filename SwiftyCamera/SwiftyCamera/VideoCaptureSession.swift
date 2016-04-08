@@ -27,9 +27,16 @@ public enum VideoCaptureSessionError : ErrorType {
     case NotAuthorized
 }
 
+public enum TorchModeStatus {
+    case TorchModeOn
+    case TorchModeOff
+    case TorchModeAutomatic
+}
+
 public class VideoCaptureSession {
     
     var captureSession : AVCaptureSession?
+    var videoInput : VideoDeviceInput?
     var videoOutput :  AVCaptureMovieFileOutput?
     var stillImageOutput : AVCaptureStillImageOutput?
     
@@ -44,11 +51,13 @@ public class VideoCaptureSession {
         self.captureSession = AVCaptureSession()
         
            self.requestVideoAuthorizationWithResultCallback { [weak self] (result) -> Void in
-            if (result == true) {
+            if result == true {
                 self?.delegate?.deviceAuthorized(result)
                 self?.isAuthorized = true
-                let videoInput = VideoDeviceInput(withDeviceInputType: VideoDeviceInputType.FrontDevice)
-                self?.captureSession?.addInput(videoInput.deviceInput)
+                self?.videoInput = VideoDeviceInput(withDeviceInputType: VideoDeviceInputType.BackDevice)
+                if let input = self?.videoInput {
+                    self?.captureSession?.addInput(input.deviceInput)
+                }
                 self?.createAndAddVideoOutput()
                 self?.createAndAddStillImageOutput()
                 self?.captureSession?.startRunning()
@@ -87,6 +96,19 @@ public class VideoCaptureSession {
                 
             })
         }
+    }
+    
+    public func changeTorchMode( torchMode : TorchModeStatus) {
+        
+        var avTorchModeStatus = AVCaptureTorchMode.Auto
+        
+        if torchMode == .TorchModeOn {
+            avTorchModeStatus = .On
+        } else if torchMode == .TorchModeOff {
+            avTorchModeStatus = .Off
+        }
+        
+        self.videoInput?.changeTorchMode(avTorchModeStatus)
     }
     
     //MARK: --- Private ---

@@ -1,4 +1,4 @@
-    //
+//
 //  SwiftyDeviceInput.swift
 //  SwiftyCamera
 //
@@ -15,21 +15,28 @@ public enum VideoDeviceInputType : Int {
 }
 
 let deviceTypeMapDictionary = [ VideoDeviceInputType.FrontDevice : AVCaptureDevicePosition.Front,
-    VideoDeviceInputType.BackDevice : AVCaptureDevicePosition.Back]
+                                VideoDeviceInputType.BackDevice : AVCaptureDevicePosition.Back]
 
 public class VideoDeviceInput {
     
     public var deviceInput : AVCaptureDeviceInput?
+    public var captureDevice : AVCaptureDevice?
     
     //MARK: --- Init ---
     
     public init( withDeviceInputType type : VideoDeviceInputType) {
-        
-        let captureDevice = VideoDeviceInput.getCaptureDeviceForType(type)
+        self.captureDevice = VideoDeviceInput.getCaptureDeviceForType(type)
         try! deviceInput =  AVCaptureDeviceInput(device: captureDevice)
-    
     }
     
+    public func changeTorchMode( torchModeStatus : AVCaptureTorchMode) -> Bool {
+        if let device = captureDevice {
+            return device.changeTorchMode(torchModeStatus)
+        } else {
+            return false
+        }
+    }
+
     //MARK: --- Private ---
     
     private class func getCaptureDeviceForType( type : VideoDeviceInputType) -> AVCaptureDevice {

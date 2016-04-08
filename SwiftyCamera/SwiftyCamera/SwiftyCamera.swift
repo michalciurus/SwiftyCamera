@@ -45,7 +45,9 @@ public class SwiftyCamera : UIViewController, VideoCaptureSessionDelegate {
     
     public override func viewDidAppear(animated: Bool) {
         
-        delay(3) { 
+        
+        delay(3) {
+            self.captureSession?.changeTorchMode(TorchModeStatus.TorchModeOn)
             try! self.captureSession?.takePicture()
         }
     }

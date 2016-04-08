@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-extension AVCaptureOutput {
+public extension AVCaptureOutput {
     
     public func getActiveVideoConnection() -> AVCaptureConnection? {
         
