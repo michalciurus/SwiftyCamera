@@ -1,4 +1,4 @@
 # SwiftyCamera
 
-Tutorial coming soon.
-Check *SwiftyCamera.swift* for code example.
+Documentation coming soon.
+Check *SwiftyCamera.swift* for example.
