@@ -22,8 +22,20 @@ public extension AVCaptureDevice {
                 }
                 self.unlockForConfiguration()
             }
-    
         return didSetTorchMode
     }
-
+    
+    public func changeFlashMode( flashModeStatus : AVCaptureFlashMode ) -> Bool {
+        var didSetFlashMode = false
+        
+        if let _ = try? self.lockForConfiguration() {
+            if self.isFlashModeSupported(flashModeStatus) {
+                self.flashMode = flashModeStatus
+                didSetFlashMode = true
+            }
+            self.unlockForConfiguration()
+        }
+        return didSetFlashMode
+    }
+    
 }

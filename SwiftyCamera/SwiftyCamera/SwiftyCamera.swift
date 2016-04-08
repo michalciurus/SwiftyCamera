@@ -47,6 +47,7 @@ public class SwiftyCamera : UIViewController, VideoCaptureSessionDelegate {
         
         
         delay(3) {
+            self.captureSession?.changeFlashMode(.On)
             try! self.captureSession?.changeTorchMode(TorchModeStatus.TorchModeOn)
             try! self.captureSession?.takePicture()
         }

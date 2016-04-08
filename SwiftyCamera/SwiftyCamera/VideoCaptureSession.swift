@@ -28,12 +28,6 @@ public enum VideoCaptureSessionError : ErrorType {
     case NotAuthorized
 }
 
-public enum TorchModeStatus {
-    case TorchModeOn
-    case TorchModeOff
-    case TorchModeAutomatic
-}
-
 //MARK: --- Class Implementation ---
 
 public class VideoCaptureSession {
@@ -92,19 +86,23 @@ public class VideoCaptureSession {
         }
     }
     
-    public func changeTorchMode( torchMode : TorchModeStatus) throws {
-        
+    public func changeFlashMode( flashMode : AVCaptureFlashMode ) throws -> Bool  {
+        try self.checkAuthorization()
+        if let input = videoInput {
+            return input.changeFlashMode(flashMode)
+        } else {
+            return false
+        }
+    }
+    
+    public func changeTorchMode( torchMode : AVCaptureTorchMode) throws -> Bool  {
         try self.checkAuthorization()
         
-        var avTorchModeStatus = AVCaptureTorchMode.Auto
-        
-        if torchMode == .TorchModeOn {
-            avTorchModeStatus = .On
-        } else if torchMode == .TorchModeOff {
-            avTorchModeStatus = .Off
+        if let input = videoInput {
+            return input.changeTorchMode(torchMode)
+        } else {
+            return false
         }
-        
-        self.videoInput?.changeTorchMode(avTorchModeStatus)
     }
     
     //MARK: --- Private ---

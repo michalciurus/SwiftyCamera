@@ -40,6 +40,14 @@ public class VideoDeviceInput {
             return false
         }
     }
+    
+    public func changeFlashMode( flashModeStatus : AVCaptureFlashMode) -> Bool {
+        if let device = captureDevice {
+            return device.changeFlashMode(flashModeStatus)
+        } else {
+            return false
+        }
+    }
 
     //MARK: --- Private ---
     
