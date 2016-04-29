@@ -1,4 +1,3 @@
 # SwiftyCamera
 
-Documentation coming soon.
-Check *SwiftyCamera.swift* for example.
+Just playing with AVFoundation in Swift. Might come useful if I ever do AVFoundation in a project.
